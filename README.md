@@ -15,7 +15,7 @@ Follow these steps to set up and run the project:
 3. Enter the following URL: https://github.com/TemirlanZhumagulov/spring_news_app/
 4. Specify the directory where you want to save the project, ensuring the path ends with \spring_news_app
 5. Click on Clone
-6. Register or generate token
+6. Register or generate a token to connect your Github account to Intellij IDEA if you have never done this before
 7. Open the terminal and run the command ***docker pull postgres*** to pull the latest PostgreSQL image
 8. After the official image is installed, go to the ***docker-compose.yml*** and start the services 
 
@@ -90,7 +90,7 @@ http://localhost:8080/api/v1/news
 // If you don't specify one field, it will be empty
 ### Scheduled statistical task
 1. Go to the ***src > main.java.strong.news > service  > NewsStatisticsService***
-2. Сhange your cron to the convinent time. The pattern is:
+2. To see if it works change your cron to the convinent time. The pattern is:
    ```
    second, minute, hour, day, month, weekday
    ````
