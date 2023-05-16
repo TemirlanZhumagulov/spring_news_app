@@ -98,11 +98,11 @@ http://localhost:8080/api/v1/news
 ### Scheduled statistical task
 1. Go to the ***src > main.java.strong.news > service  > NewsStatisticsService***
 2. Сhange your cron to the convinent time. The pattern is:
-```
-second, minute, hour, day, month, weekday
-````
+   ```
+   second, minute, hour, day, month, weekday
+   ````
    Or you can do it here: http://www.cronmaker.com/
 3. Run the app again using: docker compose up
-   After that, you will see the statistics.txt file in the src folder
+4. Check the statistics.txt file in the src folder
 
 < Thank you for your attention, and looking forward to the next round of the interview!
