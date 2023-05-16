@@ -25,22 +25,24 @@ To interact with the application, follow these steps:
 1. Open Postman.
 2. Register and obtain an access token. Without a valid token, you won't have access rights
    
-   To register send a POST request to http://localhost:8080/api/v1/auth/register . In the body section select raw and JSON and write
+   To register send a POST request to http://localhost:8080/api/v1/auth/register 
+   
+   In the body section select raw and JSON and write
     ```
     {
       "full name": "your_name",
-      "email": "temirlan@gmail.com",
-      "password": "123"
+      "email": "your_email@mail.ru",
+      "password": "your_password"
     }
     ```
    You will receive something similar to the token, **copy it for future use**:
    
    eyJhbGciOiJIUzasdasdiJ9.eyJzdWIiOiJasdasdpcmxhbkBnbWFpbC5jb20iLCJpYXQiOjE2ODQxNzgyNDEsImV4cCI6MTY4NDE3OTY4MX0.Nn5vbasdadNeuDzD2jW56sBAg8v3D_cllLOQBLuRZoXw
-3. If your token expires or becomes invalid, you can retrieve a new one by sending a request to http://localhost:8080/api/v1/auth/authenticate . In the body section select raw and JSON and write
+3. If your token expires or becomes invalid, you can retrieve a new one by sending a request to http://localhost:8080/api/v1/auth/authenticate
     ```
     {
-        "email":"temirlan@gmail.com",
-        "password":"123"
+        "email":"your_mail@mail.ru",
+        "password":"your_password"
     }
     ```
 4. Enter GET request to http://localhost:8080/api/v1/news , and go to Authroization, select the **Bearer token** and paste your token.
