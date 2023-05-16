@@ -1,5 +1,5 @@
 # Spring News App
-This repository contains a Spring Boot application with PostgreSQL, token-based authentication and authorization, and a Dockerfile.
+Spring Boot application with PostgreSQL, token-based authentication and authorization, and a Dockerfile
 
 ## Prerequisites:
 * Java JDK17+
@@ -23,8 +23,8 @@ Follow these steps to set up and run the project:
 To interact with the application, follow these steps:
 
 1. Open Postman.
-2. First of all, you need to register and obtain an access token. Without a valid token, you won't have access rights.
-You can try to check by sending GET request to http://localhost:8080/api/v1/news and you will get 403 status code
+2. First of all, you need to register and obtain an access token. Without a valid token, you won't have access rights. You can try to check by sending GET request to http://localhost:8080/api/v1/news and you will get 403 status code
+
 To register send a POST request to http://localhost:8080/api/v1/auth/register
 In the body section select raw and JSON and write
 ```
@@ -49,24 +49,36 @@ Now you can try to send it again and you will see 2 different news. Congratulati
 
 ## 4. Test other functions:
 GET, POST, PUT, DELETE methods for news sources; http://localhost:8080/api/v1/news/sources/{id} 
+
 GET, POST, PUT, DELETE methods for news; http://localhost:8080/api/v1/news/{id}
+
 GET, POST, PUT, DELETE methods for news topics; http://localhost:8080/api/v1/news/topics/{id}
+
 GET method for getting list of all news sources; http://localhost:8080/api/v1/news/sources
+
 GET method for getting list of all news topics; http://localhost:8080/api/v1/news/topics
+
 GET method for getting list of all news (with pagination); http://localhost:8080/api/v1/news
+
 GET method for getting list of news by source id (with pagination); http://localhost:8080/api/v1/news/source/{id}
+
 GET method for getting list of news by topic id (with pagination); http://localhost:8080/api/v1/news/topic/{id}
 
 When you make post request you should indicate this url and don't forget about body section, as well as in PUT request! Here for each:
 http://localhost:8080/api/v1/news/sources
+```
 {
     "name":"great source"
 }
+```
 http://localhost:8080/api/v1/news/topics
+```
 {
     "name":"great topic"
 }
+```
 http://localhost:8080/api/v1/news
+```
 {
     "title": "your title",
     "content": "your content",
@@ -80,8 +92,8 @@ http://localhost:8080/api/v1/news
     },
     "createdDate": "2023-05-16T03:34:38.2477707"
 }
-// If you haven't indicated one field it will be null
-
+```
+// If you don't specify one field, it will be empty
 ### Scheduled statistical task
 It is placed in service folder > NewsStatisticsService class
 You can change your cron to the convinent time 
@@ -93,5 +105,4 @@ http://www.cronmaker.com/
 Then you can run it again using: docker compose up
 After it you will see statistics.txt file in your src folder
 
-## So, all tasks are completed, thank you for your attention, and I'm looking forward to the next phase of the interview!
-
+< Thank you for your attention, and looking forward to the next round of the interview!
