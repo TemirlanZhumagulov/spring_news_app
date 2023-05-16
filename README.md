@@ -64,7 +64,7 @@ GET method for getting list of news by source id (with pagination); http://local
 
 GET method for getting list of news by topic id (with pagination); http://localhost:8080/api/v1/news/topic/{id}
 
-When you make post request you should indicate this url and don't forget about body section, as well as in PUT request! Here for each:
+When you make POST request you should indicate these urls with body sections! Here for each:
 http://localhost:8080/api/v1/news/sources
 ```
 {
