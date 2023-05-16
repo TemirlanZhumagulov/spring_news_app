@@ -58,7 +58,7 @@ To interact with the application, follow these steps:
 7. GET method for getting list of news by source id (with pagination); http://localhost:8080/api/v1/news/source/{id}
 8. GET method for getting list of news by topic id (with pagination); http://localhost:8080/api/v1/news/topic/{id}
 
-**When you make a POST request, you must provide the URLs below with the appropriate body sections:** (Use the same body for PUT requests)
+**When you make a POST request, you must provide the URLs below with the appropriate body sections:** (Use the same body structure for PUT requests)
 
 http://localhost:8080/api/v1/news/sources
 ```
