@@ -65,6 +65,7 @@ GET method for getting list of news by source id (with pagination); http://local
 GET method for getting list of news by topic id (with pagination); http://localhost:8080/api/v1/news/topic/{id}
 
 When you make POST request you should indicate these urls with body sections! Here for each:
+
 http://localhost:8080/api/v1/news/sources
 ```
 {
@@ -95,18 +96,13 @@ http://localhost:8080/api/v1/news
 ```
 // If you don't specify one field, it will be empty
 ### Scheduled statistical task
-Go to the ***src > main.java.strong.news > service  > NewsStatisticsService***
-
-You can change your cron to the convinent time 
-
-The pattern is:
+1. Go to the ***src > main.java.strong.news > service  > NewsStatisticsService***
+2. Сhange your cron to the convinent time. The pattern is:
 ```
 second, minute, hour, day, month, weekday
 ````
-Or you can do it here: http://www.cronmaker.com/
-
-You can then run the app again using: docker compose up
-
-After that, you will see the statistics.txt file in the src folder
+   Or you can do it here: http://www.cronmaker.com/
+3. Run the app again using: docker compose up
+   After that, you will see the statistics.txt file in the src folder
 
 < Thank you for your attention, and looking forward to the next round of the interview!
