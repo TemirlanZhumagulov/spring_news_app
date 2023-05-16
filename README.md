@@ -23,29 +23,29 @@ Follow these steps to set up and run the project:
 To interact with the application, follow these steps:
 
 1. Open Postman.
-2. First of all, you need to register and obtain an access token. Without a valid token, you won't have access rights. You can try to check by sending GET request to http://localhost:8080/api/v1/news and you will get 403 status code
-
-To register send a POST request to http://localhost:8080/api/v1/auth/register
-In the body section select raw and JSON and write
-```
-{
-  "full name": "your_name",
-  "email": "temirlan@gmail.com",
-  "password": "123"
-}
-```
-You will git token: eyJhbGciOiJIUzasdasdiJ9.eyJzdWIiOiJasdasdpcmxhbkBnbWFpbC5jb20iLCJpYXQiOjE2ODQxNzgyNDEsImV4cCI6MTY4NDE3OTY4MX0.Nn5vbasdadNeuDzD2jW56sBAg8v3D_cllLOQBLuRZoXw
-**Copy it for future use**
+2. First of all, you need to register and obtain an access token. Without a valid token, you won't have access rights.
+   You can try to check by sending GET request to http://localhost:8080/api/v1/news and you will get 403 status code
+   To register send a POST request to http://localhost:8080/api/v1/auth/register
+   In the body section select raw and JSON and write
+    ```
+    {
+      "full name": "your_name",
+      "email": "temirlan@gmail.com",
+      "password": "123"
+    }
+    ```
+   You will git token: eyJhbGciOiJIUzasdasdiJ9.eyJzdWIiOiJasdasdpcmxhbkBnbWFpbC5jb20iLCJpYXQiOjE2ODQxNzgyNDEsImV4cCI6MTY4NDE3OTY4MX0.Nn5vbasdadNeuDzD2jW56sBAg8v3D_cllLOQBLuRZoXw
+   **Copy it for future use**
 3. If your token expires or becomes invalid, you can retrieve a new one by sending a request to http://localhost:8080/api/v1/auth/authenticate
-In the body section select raw and JSON and write
-```
-{
-    "email":"temirlan@gmail.com",
-    "password":"123"
-}
-```
-2.4. Try re-entering the first get URL (http://localhost:8080/api/v1/news), but go to Authroization, select the **Bearer token** and paste your token.
-Now you can try to send it again and you will see 2 different news. Congratulations, you did everything right!
+   In the body section select raw and JSON and write
+    ```
+    {
+        "email":"temirlan@gmail.com",
+        "password":"123"
+    }
+    ```
+4. Try re-entering the first get URL (http://localhost:8080/api/v1/news), but go to Authroization, select the **Bearer token** and paste your token.
+   Now you can try to send it again and you will see 2 different news. Congratulations, you did everything right!
 
 ## 4. Test other functions:
 GET, POST, PUT, DELETE methods for news sources; http://localhost:8080/api/v1/news/sources/{id} 
@@ -95,14 +95,18 @@ http://localhost:8080/api/v1/news
 ```
 // If you don't specify one field, it will be empty
 ### Scheduled statistical task
-It is placed in service folder > NewsStatisticsService class
-You can change your cron to the convinent time 
-The pattern is:
-second, minute, hour, day, month, weekday
-Or you can do it here
-http://www.cronmaker.com/
+Go to the ***src > main.java.strong.news > service  > NewsStatisticsService***
 
-Then you can run it again using: docker compose up
-After it you will see statistics.txt file in your src folder
+You can change your cron to the convinent time 
+
+The pattern is:
+```
+second, minute, hour, day, month, weekday
+````
+Or you can do it here: http://www.cronmaker.com/
+
+You can then run the app again using: docker compose up
+
+After that, you will see the statistics.txt file in the src folder
 
 < Thank you for your attention, and looking forward to the next round of the interview!
