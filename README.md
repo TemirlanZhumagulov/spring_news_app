@@ -13,18 +13,18 @@ Follow these steps to set up and run the project:
 1. Open IntelliJ IDEA.
 2. Go to ***File > New > Project from Version Control.***
 3. Enter the following URL: https://github.com/TemirlanZhumagulov/spring_news_app/
-4. Specify the directory where you want to save the project, ensuring the path ends with \spring_news_app.
+4. Specify the directory where you want to save the project, ensuring the path ends with \spring_news_app
 5. Click on Clone
 6. Register or generate token
-7. Open the terminal and run the command ***docker pull postgres*** to pull the latest PostgreSQL image.
+7. Open the terminal and run the command ***docker pull postgres*** to pull the latest PostgreSQL image
 8. After the official image is installed, go to the ***docker-compose.yml*** and start the services 
 
 ## How to Use the Application
 To interact with the application, follow these steps:
 
 1. Open Postman.
-2. First of all, you need to register and obtain an access token. Without a valid token, you won't have access rights.
-   You can try to check by sending GET request to http://localhost:8080/api/v1/news and you will get 403 status code
+2. Register and obtain an access token. Without a valid token, you won't have access rights
+   
    To register send a POST request to http://localhost:8080/api/v1/auth/register
    In the body section select raw and JSON and write
     ```
@@ -44,7 +44,7 @@ To interact with the application, follow these steps:
         "password":"123"
     }
     ```
-4. Try re-entering the first get URL (http://localhost:8080/api/v1/news), but go to Authroization, select the **Bearer token** and paste your token.
+4. Enter GET request to http://localhost:8080/api/v1/news , and go to Authroization, select the **Bearer token** and paste your token.
    Now you can try to send it again and you will see 2 different news. Congratulations, you did everything right!
 
 ## 4. Test other functions:
