@@ -48,6 +48,7 @@ To interact with the application, follow these steps:
    Now you can try to send it again and if you will see 2 different news, congratulations, you did everything right!
 
 ## 4. Test other functions:
+*Instead of {id} you need to write integer numbers: 1,2,3*
 1. GET, POST, PUT, DELETE methods for news sources; http://localhost:8080/api/v1/news/sources/{id} 
 2. GET, POST, PUT, DELETE methods for news; http://localhost:8080/api/v1/news/{id}
 3. GET, POST, PUT, DELETE methods for news topics; http://localhost:8080/api/v1/news/topics/{id}
@@ -57,7 +58,7 @@ To interact with the application, follow these steps:
 7. GET method for getting list of news by source id (with pagination); http://localhost:8080/api/v1/news/source/{id}
 8. GET method for getting list of news by topic id (with pagination); http://localhost:8080/api/v1/news/topic/{id}
 
-When you make POST request you should indicate these urls with body sections! Here for each:
+**When you make a POST request, you must provide the URLs below with the appropriate body sections:** (Use the same body for PUT requests)
 
 http://localhost:8080/api/v1/news/sources
 ```
