@@ -1,6 +1,7 @@
 package com.strong.news.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,11 +16,20 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", updatable = false)
     private Long id;
+
+    @Column(nullable = false)
+    @Size(min = 1, max = 255, message = "Full name must be lesser than 255 characters")
     private String fullName;
+
+    @Column(nullable = false, unique = true)
+    @Size(min = 1, max = 255, message = "Email must be lesser than 255 characters")
     private String email;
+    @Column(nullable = false)
+    @Size(min = 1, max = 255, message = "Password must be lesser than 255 characters")
     private String password;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Role role;
 
     public User() {

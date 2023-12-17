@@ -36,6 +36,12 @@ public class JwtService {
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
+    public boolean isTokenRevoked(String token) {
+        Claims claims = extractAllClaims(token);
+        Date revokedAt = (Date) claims.get("revokedAt");
+        return revokedAt != null && revokedAt.before(new Date());
+    }
+
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
@@ -67,6 +73,12 @@ public class JwtService {
     private Key getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    public void expireToken(String token) {
+        Claims claims = extractAllClaims(token);
+        claims.setExpiration(new Date(0));
+        claims.put("revokedAt", new Date());
     }
 
 }
