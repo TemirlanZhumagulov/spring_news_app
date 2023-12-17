@@ -1,25 +1,4 @@
-Source 1: 1
-Source 2: 2
-Source 1: 1
-Source 2: 0
-Source 1: 1
-Source 2: 1
-Test Source: 2
-Source 1: 1
-Source 2: 1
-Test Source: 2
-Source 1: 1
-Source 2: 1
-Test Source: 2
-Source 1: 1
-Source 2: 1
-Source 1: 1
-Source 2: 1
-Source 1: 1
-Source 2: 1
-Source 1: 1
-Source 2: 1
-Source 1: 1
-Source 2: 1
+Statistics generated at: 2023-12-18 05:02:00
+
 Source 1: 1
 Source 2: 1

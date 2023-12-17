@@ -37,7 +37,7 @@ public class NewsController {
         return news.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<News> addNews(@RequestBody News news) {
         News addedNews = newsService.addNews(news);
         return ResponseEntity.status(HttpStatus.CREATED).body(addedNews);

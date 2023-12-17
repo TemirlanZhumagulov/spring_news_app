@@ -1,6 +1,7 @@
 package com.strong.news.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +13,8 @@ public class News {
     @Column(name = "news_id", updatable = false)
     private Long id;
 
+    @Column(nullable = false)
+    @Size(min = 1, max = 255, message = "Title name must be lesser than 255 characters")
     private String title;
 
     private String content;

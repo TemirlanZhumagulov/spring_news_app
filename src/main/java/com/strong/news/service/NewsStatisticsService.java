@@ -10,8 +10,9 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -26,9 +27,13 @@ public class NewsStatisticsService {
         this.newsService = newsService;
     }
 
-    @Scheduled(cron = "0 0 0 * * ?") // Runs at midnight every day
+    @Scheduled(cron = "0 0/1 * * * ?") // Runs every 1 minutes
     public void generateStatisticsFile() {
-        logger.info("Scheduled task started. Current time: {}", new Date());
+        LocalDateTime currentTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = currentTime.format(formatter);
+
+        logger.info("Scheduled task started. Current time: {}", formattedDateTime);
         List<Source> newsSources = sourceService.getAllNewsSources();
 
         ExecutorService executorService = Executors.newFixedThreadPool(newsSources.size());
@@ -45,10 +50,11 @@ public class NewsStatisticsService {
 
         executorService.shutdown();
 
-        // Writes statistics to the file statistics.txt, which will be created in the src folder of this project
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("statistics.txt"));
-            logger.info("File created");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("statistics.txt"))) {
+            writer.write("Statistics generated at: " + formattedDateTime);
+            writer.newLine();
+            writer.newLine(); // Add an empty line for better readability
+
             for (Future<String> result : results) {
                 try {
                     writer.write(result.get());
@@ -57,8 +63,8 @@ public class NewsStatisticsService {
                     e.printStackTrace();
                 }
             }
-            logger.info("File filled out");
-            writer.close();
+
+            logger.info("File created and filled out");
         } catch (IOException e) {
             e.printStackTrace();
         }
