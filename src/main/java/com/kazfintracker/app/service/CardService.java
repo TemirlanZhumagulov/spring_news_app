@@ -25,18 +25,17 @@ public class CardService {
 
     public List<Card> getAllCardsForCurrentUser(String userEmail) {
         return cardRepo.findByUserOrderByCreatedDateDesc(userRepo.findByEmail(userEmail)
-                .orElseThrow(() -> new RuntimeException("User not found")));
+                .orElseThrow(() -> new RuntimeException("0sUkZw66hl :: User not found")));
     }
 
     public Optional<Card> getCardById(Long cardId, String userEmail) {
-
         return cardRepo.findByIdAndUser(cardId, userRepo.findByEmail(userEmail)
-                .orElseThrow(() -> new RuntimeException("User not found")));
+                .orElseThrow(() -> new RuntimeException("OOWfi6gfUA :: User not found")));
     }
 
     public void addCardToCurrentUser(Card card, String userEmail) {
         User currentUser = userRepo.findByEmail(userEmail)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("ixi5gTuJyO :: User not found"));
 
         card.setUser(currentUser);
         card.setCreatedDate(LocalDateTime.now());
@@ -46,7 +45,7 @@ public class CardService {
 
     public void updateCard(Card updatedCard, String userEmail) {
         User currentUser = userRepo.findByEmail(userEmail)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("BDUdtF1sLv :: User not found"));
 
         cardRepo.findByIdAndUser(updatedCard.getId(), currentUser)
                 .ifPresentOrElse(existingCard -> {
@@ -54,17 +53,17 @@ public class CardService {
                     existingCard.setType(updatedCard.getType());
                     cardRepo.save(existingCard);
                 }, () -> {
-                    throw new RuntimeException("Card not found for the current user");
+                    throw new RuntimeException("BtA05ZCVge :: Card not found for the current user");
                 });
     }
 
     public void deleteCard(Long cardId, String userEmail) {
         User currentUser = userRepo.findByEmail(userEmail)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("xW70S31CDd :: User not found"));
 
         cardRepo.findByIdAndUser(cardId, currentUser)
                 .ifPresentOrElse(cardRepo::delete, () -> {
-                    throw new RuntimeException("Card not found for the current user");
+                    throw new RuntimeException("jgz16kLsuE :: Card not found for the current user");
                 });
     }
 

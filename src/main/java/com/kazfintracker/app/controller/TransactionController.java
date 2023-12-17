@@ -1,7 +1,6 @@
 package com.kazfintracker.app.controller;
 
 import com.kazfintracker.app.model.banking.Transaction;
-import com.kazfintracker.app.service.CardService;
 import com.kazfintracker.app.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,7 +17,7 @@ public class TransactionController {
     private final TransactionService transactionService;
 
     @Autowired
-    public TransactionController(TransactionService transactionService, CardService cardService) {
+    public TransactionController(TransactionService transactionService) {
         this.transactionService = transactionService;
     }
 

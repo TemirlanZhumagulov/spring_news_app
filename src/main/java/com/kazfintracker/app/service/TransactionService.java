@@ -46,13 +46,13 @@ public class TransactionService {
     }
     public Optional<Transaction> updateTransaction(Long cardId, Long id, Transaction updatedTransaction, String userEmail) {
         cardService.getCardById(cardId, userEmail)
-                .orElseThrow(() -> new RuntimeException("Card not found"));
+                .orElseThrow(() -> new RuntimeException("i9pi2eBcsr :: Card not found"));
 
         Optional<Transaction> existingTransaction = transactionRepo.findById(id);
 
         existingTransaction.ifPresent(existing -> {
             if (!existing.getCard().getId().equals(cardId)) {
-                throw new RuntimeException("Transaction does not belong to the specified card");
+                throw new RuntimeException("h1aS6jnIsR :: Transaction does not belong to the specified card");
             }
             existing.setCard(updatedTransaction.getCard());
             existing.setAmount(updatedTransaction.getAmount());
@@ -65,13 +65,13 @@ public class TransactionService {
 
     public void deleteTransaction(Long cardId, Long id, String userEmail) {
         cardService.getCardById(cardId, userEmail)
-                .orElseThrow(() -> new RuntimeException("Card not found"));
+                .orElseThrow(() -> new RuntimeException("315ThpYa67 :: Card not found"));
 
         transactionRepo.findById(id)
                 .filter(transaction -> transaction.getCard().getId().equals(cardId))
                 .ifPresentOrElse(transactionRepo::delete,
                         () -> {
-                            throw new RuntimeException("Transaction not found or does not belong to the specified card");
+                            throw new RuntimeException("0XTF3B4ViN :: Transaction not found or does not belong to the specified card");
                         });
     }
 
