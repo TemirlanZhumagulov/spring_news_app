@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.*;
@@ -20,6 +21,7 @@ import java.util.concurrent.*;
 @Slf4j
 @Service
 public class NewsStatisticsService {
+    private static final String STATISTICS_FILE_NAME = "statistics.txt";
     private final SourceService sourceService;
     private final NewsService newsService;
     @Autowired
@@ -28,11 +30,12 @@ public class NewsStatisticsService {
         this.newsService = newsService;
     }
 
-    @Scheduled(cron = "0 0 0 * * ?") // Runs at midnight every day
+    @Scheduled(cron = "0 * * * * *")
     public void generateStatisticsFile() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+6"));
-        log.info("Scheduled task started. Current time: {}", dateFormat.format(dateFormat));
+        String formatted = dateFormat.format(new Date());
+        log.info("Scheduled task started. Current time: {}", formatted);
 
         List<Source> newsSources = sourceService.getAllNewsSources();
 
@@ -52,8 +55,12 @@ public class NewsStatisticsService {
 
         // Writes statistics to the file statistics.txt, which will be created in the src folder of this project
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("statistics.txt"));
-            log.info("File created");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(STATISTICS_FILE_NAME, true));
+            log.info("Started filling out the file: " + STATISTICS_FILE_NAME);
+            writer.write("Counting news by sources for: " + formatted);
+            writer.newLine();
+            writer.write("------------------------------------------------");
+            writer.newLine();
             for (Future<String> result : results) {
                 try {
                     writer.write(result.get());
@@ -63,7 +70,9 @@ public class NewsStatisticsService {
                     e.printStackTrace();
                 }
             }
-            log.info("File filled out");
+            writer.write("------------------------------------------------");
+            writer.newLine();
+            log.info("Finished filling out the file: " + STATISTICS_FILE_NAME);
             writer.close();
         } catch (IOException e) {
             log.info("Exception in generateStatisticsFile:" + e.getMessage());
