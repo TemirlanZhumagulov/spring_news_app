@@ -15,6 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "app_users")
 @Data
+@AllArgsConstructor
 @Builder
 public class User implements UserDetails {
     @Id
