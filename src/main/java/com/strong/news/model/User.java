@@ -1,7 +1,10 @@
 package com.strong.news.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,19 +14,25 @@ import java.util.List;
 
 @Entity
 @Table(name = "app_users")
+@Data
+@Builder
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", updatable = false)
     private Long id;
 
+    @Email
+    @Column(nullable = false, unique = true)
+    @Size(min = 1, max = 255, message = "Email must be lesser than 255 characters")
+    private String email;
+
+    @NotBlank
     @Column(nullable = false)
     @Size(min = 1, max = 255, message = "Full name must be lesser than 255 characters")
     private String fullName;
 
-    @Column(nullable = false, unique = true)
-    @Size(min = 1, max = 255, message = "Email must be lesser than 255 characters")
-    private String email;
+    @NotBlank
     @Column(nullable = false)
     @Size(min = 1, max = 255, message = "Password must be lesser than 255 characters")
     private String password;
@@ -33,37 +42,6 @@ public class User implements UserDetails {
     private Role role;
 
     public User() {
-    }
-
-    public User(String fullName, String email, String password, Role role) {
-        this.fullName = fullName;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     @Override
@@ -101,7 +79,4 @@ public class User implements UserDetails {
         return true;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

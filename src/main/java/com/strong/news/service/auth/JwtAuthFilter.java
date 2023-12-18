@@ -1,6 +1,6 @@
-package com.strong.news.configuration;
+package com.strong.news.service.auth;
 
-import com.strong.news.service.JwtService;
+import com.strong.news.service.auth.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,5 +1,9 @@
-package com.strong.news.auth;
+package com.strong.news.controller;
 
+import com.strong.news.model.auth.AuthenticationRequest;
+import com.strong.news.model.auth.AuthenticationResponse;
+import com.strong.news.model.auth.RegisterRequest;
+import com.strong.news.service.auth.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

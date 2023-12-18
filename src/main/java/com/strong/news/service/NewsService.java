@@ -48,18 +48,7 @@ public class NewsService {
 
     public News addNews(News news) {
         news.setCreatedDate(LocalDateTime.now());
-
-        Source source = news.getSource();
-        if (source != null && source.getId() == null) {
-            source = sourceRepo.save(source);
-            news.setSource(source);
-        }
-
-        Topic topic = news.getTopic();
-        if (topic != null && topic.getId() == null) {
-            topic = topicRepo.save(topic);
-            news.setTopic(topic);
-        }
+        setDependentTables(news, news);
         return newsRepo.save(news);
     }
     public Optional<News> updateNews(Long id, News updatedNews) {
@@ -67,23 +56,23 @@ public class NewsService {
         existingNews.ifPresent(news -> {
             news.setTitle(updatedNews.getTitle());
             news.setContent(updatedNews.getContent());
-
-
-            Source source = updatedNews.getSource();
-            if (source != null && source.getId() == null) {
-                source = sourceRepo.save(source);
-                news.setSource(source);
-            }
-
-
-            Topic topic = updatedNews.getTopic();
-            if (topic != null && topic.getId() == null) {
-                topic = topicRepo.save(topic);
-                news.setTopic(topic);
-            }
+            setDependentTables(updatedNews, news);
             newsRepo.save(news);
         });
         return existingNews;
+    }
+
+    private void setDependentTables(News updatedNews, News news) {
+        Source source = updatedNews.getSource();
+        if (source != null && source.getId() == null) {
+            source = sourceRepo.save(source);
+            news.setSource(source);
+        }
+        Topic topic = updatedNews.getTopic();
+        if (topic != null && topic.getId() == null) {
+            topic = topicRepo.save(topic);
+            news.setTopic(topic);
+        }
     }
 
     public void deleteNews(Long id) {

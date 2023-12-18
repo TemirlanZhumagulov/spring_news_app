@@ -1,9 +1,11 @@
-package com.strong.news.auth;
+package com.strong.news.service.auth;
 
+import com.strong.news.model.auth.AuthenticationRequest;
+import com.strong.news.model.auth.AuthenticationResponse;
+import com.strong.news.model.auth.RegisterRequest;
 import com.strong.news.model.Role;
 import com.strong.news.model.User;
 import com.strong.news.repository.UserRepo;
-import com.strong.news.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,6 +18,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+
     @Autowired
     public AuthenticationService(UserRepo repo, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager) {
         this.repo = repo;
@@ -25,12 +28,11 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse register(RegisterRequest request) {
-        var user = new User(
-                request.getFullName(),
-                request.getEmail(),
-                passwordEncoder.encode(request.getPassword()),
-                Role.USER
-                );
+        var user = User.builder().email(request.getEmail())
+                .fullName(request.getFullName())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(Role.USER)
+                .build();
         repo.save(user);
         var jwtToken = jwtService.generateToken(user);
         return new AuthenticationResponse(jwtToken);

@@ -1,6 +1,6 @@
-package com.strong.news.auth;
+package com.strong.news.service.auth;
 
-import com.strong.news.service.JwtService;
+import com.strong.news.service.auth.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,8 @@
-package com.strong.news.service;
+package com.strong.news.service.scheduled;
 
 import com.strong.news.model.Source;
+import com.strong.news.service.NewsService;
+import com.strong.news.service.SourceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +12,8 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -27,13 +28,9 @@ public class NewsStatisticsService {
         this.newsService = newsService;
     }
 
-    @Scheduled(cron = "0 0/1 * * * ?") // Runs every 1 minutes
+    @Scheduled(cron = "0 0 0 * * ?") // Runs at midnight every day
     public void generateStatisticsFile() {
-        LocalDateTime currentTime = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String formattedDateTime = currentTime.format(formatter);
-
-        logger.info("Scheduled task started. Current time: {}", formattedDateTime);
+        logger.info("Scheduled task started. Current time: {}", new Date());
         List<Source> newsSources = sourceService.getAllNewsSources();
 
         ExecutorService executorService = Executors.newFixedThreadPool(newsSources.size());
@@ -50,11 +47,10 @@ public class NewsStatisticsService {
 
         executorService.shutdown();
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("statistics.txt"))) {
-            writer.write("Statistics generated at: " + formattedDateTime);
-            writer.newLine();
-            writer.newLine(); // Add an empty line for better readability
-
+        // Writes statistics to the file statistics.txt, which will be created in the src folder of this project
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("statistics.txt"));
+            logger.info("File created");
             for (Future<String> result : results) {
                 try {
                     writer.write(result.get());
@@ -63,8 +59,8 @@ public class NewsStatisticsService {
                     e.printStackTrace();
                 }
             }
-
-            logger.info("File created and filled out");
+            logger.info("File filled out");
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

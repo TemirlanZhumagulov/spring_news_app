@@ -29,7 +29,7 @@ public class NewsController {
         this.newsSourceService = newsSourceService;
     }
 
-    // News API methods
+    // region News API methods
 
     @GetMapping("/{id}")
     public ResponseEntity<News> getNewsById(@PathVariable Long id) {
@@ -81,7 +81,9 @@ public class NewsController {
         return ResponseEntity.ok(newsList);
     }
 
-    // News Source API methods
+    // endregion News API methods
+
+    // region News Source API methods
 
     @GetMapping("/sources")
     public ResponseEntity<List<Source>> getAllNewsSources() {
@@ -113,7 +115,9 @@ public class NewsController {
         return ResponseEntity.noContent().build();
     }
 
-// News Topic API methods
+    // endregion News Source API methods
+
+    // region News Topic API methods
 
     @GetMapping("/topics")
     public ResponseEntity<List<Topic>> getAllNewsTopics() {
@@ -144,5 +148,7 @@ public class NewsController {
         newsTopicService.deleteNewsTopic(id);
         return ResponseEntity.noContent().build();
     }
+
+    // endregion News Topic API methods
 
 }

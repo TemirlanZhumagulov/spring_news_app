@@ -1,4 +1,4 @@
-package com.strong.news.service;
+package com.strong.news.service.auth;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
